@@ -19,6 +19,10 @@ export type ValidationInput =
 // 042: код-таксономия — часть публичной поверхности валидатора (потребители-гейты сверяют severity).
 export { CODE_SEVERITY, ALL_VALIDATION_CODES } from './codes.js';
 
+// 042 FU2: забандленные 017-схемы как публичный API (потребители schema-registry: backtester).
+export { schemaAsset, allSchemaAssets, SCHEMA_FILES, SCHEMA_IDS } from './schema-assets.js';
+export type { CoreSchemaName } from './schema-assets.js';
+
 // Реестр схем компилируется один раз (кэш core-схем) и переиспользуется. Чистоту validate()
 // это не нарушает: реестр не несёт изменяемого состояния между вызовами для одного входа.
 let registrySingleton: SchemaRegistry | undefined;
