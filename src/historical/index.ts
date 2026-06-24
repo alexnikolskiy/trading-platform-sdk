@@ -17,3 +17,6 @@ export type {
   CanonicalRowV2,
   CanonicalRowV2Field,
 } from './canonical-row.js';
+
+// Generic historical.2 HTTP client (discover/coverage/queryRows).
+export * from './client.js';
