@@ -21,7 +21,6 @@ export type AdmissionOutcome = 'admitted' | 'rejected' | 'quarantined';
 export interface PaperCandidateEvidenceInput {
   readonly baselineRunId: string;
   readonly variantRunId: string;
-  readonly researchJobRef?: string | null;
   readonly artifactRefs?: readonly string[];
   readonly externalEvidenceRef?: string | null;
   readonly datasetRef: string;
@@ -92,7 +91,6 @@ export interface PaperCandidateEvidenceRefs {
   readonly datasetRef: string;
   readonly symbols: readonly string[];
   readonly timeframe: string;
-  readonly researchJobRef: string | null;
   readonly artifactRefCount: number;
   readonly hasExternalEvidenceRef: boolean;
 }
