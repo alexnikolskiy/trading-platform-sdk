@@ -33,10 +33,40 @@ export interface ClosedTrade {
   readonly side: TradeSide;
   readonly openedAtMs: number;
   readonly closedAtMs: number | null;
+  readonly entryPrice: string | null;
+  readonly exitPrice: string | null;
   readonly realizedPnl: string;
   readonly pnlPct: string;
   readonly isWin: boolean | null;
   readonly closeReason: string | null;
+}
+
+// ops.4 — per-trade forensic evidence (Surface A): prices + lifecycle timeline.
+// 'sl'/'stop_update' are part of the union for forward-compat, but the platform never synthesizes
+// them (a stop-loss appears as closeReason='stop_loss' on the 'exit' event), so they don't occur.
+export type OpsTradeLifecycleEventType = 'entry' | 'dca' | 'tp' | 'sl' | 'exit' | 'stop_update';
+
+export interface TradeLifecycleEvent {
+  readonly tsMs: number;
+  readonly type: OpsTradeLifecycleEventType;
+  readonly price: string | null;
+  readonly qty: string | null;
+  readonly note?: string | null;
+}
+
+export interface TradeEvidence {
+  readonly tradeId: string;
+  readonly runId: string;
+  readonly symbol: string;
+  readonly side: TradeSide;
+  readonly openedAtMs: number;
+  readonly closedAtMs: number | null;
+  readonly entryPrice: string | null;
+  readonly exitPrice: string | null;
+  readonly realizedPnl: string;
+  readonly pnlPct: string;
+  readonly closeReason: string | null;
+  readonly lifecycle: readonly TradeLifecycleEvent[];
 }
 
 export interface ClosedTradesAggregate {
